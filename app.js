@@ -5,16 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
-var csrf = require('lusca').csrf();
+var lusca = require('lusca');
+var session = require('express-session');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
-// configration for security
-app.use(helmet());
-app.use(lusca.csrf());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +24,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// configration for security
+app.use(helmet());
+app.use(session({
+   secret: '5w4F5pHJemXv',
+   resave: false,
+   saveUninitialized: true
+}));
+app.use(lusca.csrf());
 
 app.use('/', index);
 app.use('/users', users);
