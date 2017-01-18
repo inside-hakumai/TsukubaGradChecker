@@ -13,6 +13,8 @@ var users = require('./routes/users');
 
 var app = express();
 
+// var stylesheets = require('./routes/stylesheets')(express, app);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -36,6 +38,18 @@ app.use(lusca.csrf());
 
 app.use('/', index);
 app.use('/users', users);
+
+/* stylesheet routing */
+app.use('/css', express.static(path.resolve(__dirname + '/public/stylesheets')));
+
+/* javascript routing */
+app.get('/js/material.min.js', function(req, res, next) {
+   res.sendFile(path.resolve(__dirname + '/node_modules/material-design-lite/material.min.js'));
+});
+app.use('/js', express.static(path.resolve(__dirname + '/public/javascripts')));
+
+/* image routing */
+app.use('/images', express.static(path.resolve(__dirname + '/public/images')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

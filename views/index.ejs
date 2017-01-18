@@ -1,11 +1,226 @@
 <!DOCTYPE html>
+
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1">
+
+   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-pink.min.css" />
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <link rel="stylesheet" href="/css/style.css">
+
+   <title>卒業要件ちぇっかー(β)</title>
+</head>
+
+<body>
+   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+         <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Checker(β)</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+               <a class="mdl-navigation__link" href="#about">About</a>
+               <a class="mdl-navigation__link" href="#howtouse">How to Use</a>
+               <a class="mdl-navigation__link" href="#caution">Caution</a>
+               <a class="mdl-navigation__link" href="#gettingstarted">Getting Started</a>
+               <a class="mdl-navigation__link" href="#faq">FAQ</a>
+               <a class="mdl-navigation__link" href="#others">Others</a>
+            </nav>
+         </div>
+      </header>
+      <div class="mdl-layout__drawer">
+         <span class="mdl-layout-title">Checker(β)</span>
+         <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="#about">About</a>
+            <a class="mdl-navigation__link" href="#howtouse">How to Use</a>
+            <a class="mdl-navigation__link" href="#caution">Caution</a>
+            <a class="mdl-navigation__link" href="#gettingstarted">Getting Started</a>
+            <a class="mdl-navigation__link" href="#faq">FAQ</a>
+            <a class="mdl-navigation__link" href="#others">Others</a>
+         </nav>
+      </div>
+      <main class="mdl-layout__content">
+         <div class="page-content">
+            <!-- Your content goes here -->
+            <div id="title">
+               <h1>卒業要件ちぇっかー(β)</h1>
+               <p>TWINSの履修情報から、卒業要件の判定を行います</p>
+            </div>
+
+            <div id="about">
+               <div class="content-wrapper">
+
+                  <div class="mdl-card mdl-shadow--4dp">
+                     <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text"><i class="material-icons">info_outline</i>About</h2>
+                     </div>
+                     <div class="mdl-card__supporting-text">
+                        Twins上の履修データから、学類の卒業要件との照合を行うサービスです。<br/> このサービスを使うと、以下のようなことが分かります。
+                        <ol>
+                           <li>現状でどの程度卒業要件を満たしているかが分かります。</li>
+                           <li>あとどれくらい単位を取らなくてはいけないかが分かります。</li>
+                           <li><span style="text-decoration:line-through;">足りない単位を埋めるためにどのような科目を履修すれば良いかが分かります。</span>未実装です。ごめんなさい</li>
+                        </ol>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div id="howtouse">
+               <div class="content-wrapper">
+                  <div class="mdl-card mdl-shadow--4dp">
+                     <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text"><i class="material-icons">help_outline</i>How to Use</h2>
+                     </div>
+                     <div class="mdl-card__supporting-text mdl-card--border">
+                        <p>
+                           1. Twinsにログインし、左のメニューから「成績」→「履修成績照会」を開いてください。<br/>
+                           <img src="./images/howtouse/screenshot_01.png">
+                        </p>
+                     </div>
+                     <div class="mdl-card__supporting-text mdl-card--border">
+                        <p>
+                           2. 表示された自分の履修データのページの最下部の「ダウンロード」をクリックしてください。<br/>
+                           <img src="./images/howtouse/screenshot_02.png">
+                        </p>
+                     </div>
+                     <div class="mdl-card__supporting-text mdl-card--border">
+                        <p>
+                           3. ファイル形式は「CSV」、文字コードは「Unicode（UTF-8）」にチェックを入れて、「出力」をクリックしてください。<br/>
+                           <img src="./images/howtouse/screenshot_03.png">
+                        </p>
+                     </div>
+                     <div class="mdl-card__supporting-text mdl-card--border">
+                        <p>
+                           4. このページ下部のフォームから学類・入学年度を選択し、先程ダウンロードしたファイルを指定してください。
+                        </p>
+                     </div>
+                     <div class="mdl-card__actions">
+                        <a href="#gettingstarted" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">フォームに移動する</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div id="caution">
+               <div class="content-wrapper">
+                  <div class="mdl-card mdl-shadow--4dp">
+                     <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text"><i class="material-icons">warning</i>Caution</h2>
+                     </div>
+                     <div class="mdl-card__supporting-text">
+                        <dl>
+                           <dt>得られた照合結果の正当性について</dt>
+                           <dd>
+                              このサービスで提供される卒業要件と履修情報の照合結果は、あくまで機械的にデータを処理した結果であるため、必ずしも最適な結果ではない可能性・誤った結果である可能性があります。<br/> ここで得られた結果を参考にして履修計画を立てる場合は、<span class="bold">最後は必ず自分で卒業要件を見て、問題が無いことを確認するようお願いします。</span>
+                           </dd>
+
+                           <dt>発生した損害等について</dt>
+                           <dd>
+                              前項の内容も含め、このサービスの使用したことによって発生したいかなる損害に関して作者は責任を負いません。理解の上、利用をお願いします。
+                           </dd>
+
+                           <dt>対応ブラウザについて</dt>
+                           <dd>
+                              Google Chrome、Firefox、Safariで動作を確認しています。<br/> 現状Internet Explorer、Edgeには対応していません。<br/> Android、iPhone等スマートフォン版ブラウザの動作は未確認です。
+                           </dd>
+                        </dl>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div id="gettingstarted">
+               <div class="content-wrapper">
+                  <h2>Getting Started</h2>
+                  <p class="alert"><i class="material-icons">report_problem</i>使用する前に、前述の「<a href="#caution">Caution</a>」の項目の内容を必ず確認してください。</p>
+                  <div class="react-render-area">
+                     <div id="input-form-wrapper" class="mdl-grid">
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div id="result" style="height:0;">
+               <div class="content-wrapper">
+                  <h2>Result</h2>
+                  <div class="react-render-area">
+                  </div>
+               </div>
+            </div>
+
+            <div id="faq">
+               <div class="content-wrapper">
+                  <div class="mdl-card mdl-shadow--4dp">
+                     <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text"><i class="material-icons">speaker_notes</i>FAQ</h2>
+                     </div>
+                     <div class="mdl-card__supporting-text">
+                        <dl>
+                           <dt>履修データ内の個人情報の扱いはどうなっているのか。</dt>
+                           <dd>
+                              このサービスで照合の際に利用する履修データ内の情報は「履修した科目名」「科目番号」「科目の成績」「科目の単位数」の4つです。<br/> これらの情報を学生の名前や学籍番号など、個人を特定できる情報と絡めて処理することはありません。
+                              <br/> また、卒業要件と履修データの照合はすべてブラウザ側で完結しており、サーバーにアップロードされる事は一切ありません。そのため、作者側で学生の履修データを集めているといった事もありません。
+                              <br/>
+                           </dd>
+                        </dl>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div id="others">
+               <div class="content-wrapper">
+                  <div class="mdl-card mdl-shadow--4dp">
+                     <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text"><i class="material-icons">announcement</i>Others</h2>
+                     </div>
+                     <div class="mdl-card__supporting-text">
+                        <dl>
+                           <dt>連絡先</dt>
+                           <dd>
+                              <p>問題の報告等は以下の作者Twitterまでお願いします。</p>
+                              <p><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored button-twitter"><a href="https://twitter.com/inside_hakumai" target="_blank"><img src="./images/twitter-logo.png">@inside_hakumai</a></button></p>
+                           </dd>
+                        </dl>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+
+            <footer class="mdl-mini-footer">
+               <div class="mdl-mini-footer__left-section">
+                  <div class="mdl-logo">Copyright © 2017 はくまい(@inside_hakumai)</div>
+               </div>
+            </footer>
+
+         </div>
+      </main>
+   </div>
+
+   <div id="grey_panel">
+      <div id="spinner" class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+   </div>
+
+   <!-- React -->
+   <script src="https://unpkg.com/react@15.4.0/dist/react.js "></script>
+   <script src="https://unpkg.com/react-dom@15.4.0/dist/react-dom.js "></script>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js "></script>
+   <script src="/js/material.min.js"></script>
+
+   <script src="./js/velocity.min.js"></script>
+
+   <!-- other scripts -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js "></script>
+   <script src="./js/verification.js " type="text/javascript "></script>
+   <script src="./js/script.js"></script>
+
+</body>
+
 </html>
