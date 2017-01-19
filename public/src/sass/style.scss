@@ -1,0 +1,190 @@
+main.mdl-layout__content {
+   background-color: #FAFAFA;
+
+   div#title {
+      h1 {
+         text-align: center;
+         font-weight: bold;
+      }
+      p {
+         text-align: center;
+      }
+   }
+
+   div.mdl-card__title+div.mdl-card__supporting-text {
+      padding-top: 0;
+   }
+
+   div#about, div#howtouse, div#caution, div#others, div#faq {
+
+      div.mdl-card {
+         width: 100%; 
+      }
+
+      h2.mdl-card__title-text {
+         line-height: 40px;
+         font-weight: bold;
+         
+         i.material-icons {
+            line-height: 40px;
+         }
+      }
+      div.mdl-card__supporting-text {
+         width: auto;
+         color: #000000;
+      }
+   }
+   div#howtouse div.mdl-card__supporting-text p img {
+      display: block;
+      max-width: 100%;
+   }
+   div#caution, div#others, div#faq {
+      div.mdl-card__supporting-text dl dd {
+         margin: 1em 0 2em 1em;
+      }
+   }
+   div#others button.button-twitter {
+      background-color: #1DA1F2;
+      padding-left: 10px;
+
+      a {
+         color: #FFFFFF;
+         text-decoration: none;
+         text-transform: none;
+      }
+      img {
+         height: 100%;
+      }
+   }
+   div#gettingstarted {
+      margin: 0 0 60px 0;
+      padding: 10px 0;
+      background-color: #CEEEEF;
+      overflow: hidden;
+
+      p.alert {
+         color: #FF0000;
+
+         i.material-icons {
+            vertical-align: middle;
+         }
+      }
+      div#collage-input-wrapper {
+         padding-top: 0;
+         width: 90%;
+      }
+      select#collage {
+         background-color: #FFFFFF;
+         height: 40px;
+      }
+      div#file-input-wrapper {
+         width: 90%;
+         background-color: #FFFFFF;
+         border-radius: 5px;
+         height: 39px;
+         position: relative;
+
+         button#file-select-icon {
+            height: 100%;
+            width: 64px;
+            padding: 0;
+            border-radius: 5px 0 0 5px;
+         }
+         input#fileName {
+            font-size: 16px;
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            left: 70px;
+            height: 60%;
+            border: none;
+         }
+      }
+      div#check-button-wrapper {
+         text-align: center;
+      }
+   }
+   div#result {
+      margin: 0 0 60px 0;
+      /* padding: 10px 0; */
+      background-color: #EFE6CE;
+      overflow: hidden;
+
+      div.addup-info {
+         width: 100%;
+         height: 50px;
+         margin-bottom: 20px;
+         min-height: initial;
+         font-weight: bold;
+         div.mdl-card__supporting-text {
+            color: #000000;
+
+            span {
+               border: 1px solid #eeeeee;
+               padding: 6px;
+               border-radius: 5px;
+               margin-right: 10px;
+               background-color: #eeeeee;
+            }
+         }
+      }
+      div.filled.addup-info {
+         background-color: #CEFFD6;
+      }
+      div.unfilled.addup-info {
+         background-color: #FFCECE;
+      }
+      table.result-table {
+         width: 100%;
+         margin-bottom: 20px;
+
+         tr.learning {
+            background-color: #FFF4CE;
+         }
+         tr.unacquired {
+            background-color: #FFCECE;
+         }
+         th.col-header {
+            background: #EEEEEE;
+            color: #000000;
+            font-weight: bold;
+         }
+         thead.filled>tr>th.col-header {
+            background: #CEFFD6;
+         }
+         thead.unfilled>tr>th.col-header {
+            background: #FFCECE;
+         }
+      }
+   }
+   div.content-wrapper {
+      max-width: 960px;
+      margin: 0 auto 60px;
+   }
+   span.bold {
+      font-weight: bold;
+   }
+}
+
+div#grey_panel {
+   background: #000;
+   opacity: 0.5;
+   width: 100%;
+   height: 99999px;
+   position: fixed;
+   top: 0;
+   left: 0;
+   display: none;
+   z-index: 50;
+
+   div#spinner {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+   }
+}

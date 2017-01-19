@@ -9,7 +9,8 @@ var lusca = require('lusca');
 var session = require('express-session');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var request = require('./routes/request');
+// var users = require('./routes/users');
 
 var app = express();
 
@@ -36,8 +37,15 @@ app.use(session({
 }));
 app.use(lusca.csrf());
 
-app.use('/', index);
-app.use('/users', users);
+app.get('/', index);
+
+/* reqiurement data request */
+app.get('/endpoint', function (req, res) {
+   res.send(req.csrfToken());
+});
+app.post('/endpoint', request);
+
+// app.use('/users', users);
 
 /* stylesheet routing */
 app.use('/css', express.static(path.resolve(__dirname + '/public/stylesheets')));
@@ -67,6 +75,8 @@ app.use(function(err, req, res, next) {
    // render the error page
    res.status(err.status || 500);
    res.render('error');
+
+   console.log(res.locals.message);
 });
 
 module.exports = app;
