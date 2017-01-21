@@ -1,4 +1,4 @@
-module.exports = function(express, app) {
+module.exports = function (express, app) {
 
    var router = express.Router();
 
@@ -9,4 +9,4 @@ module.exports = function(express, app) {
    app.use('/', express.static(path.resolve(__dirname + '/../public/stylesheets')));
 
    return router;
-}
+};

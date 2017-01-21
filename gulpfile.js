@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var babelify = require('babelify');
 var browserify = require('browserify');
-var source = require('vinyl-source-streamY');
+var source = require('vinyl-source-stream');
 
 // Sass compile
 gulp.task('sass', function () {

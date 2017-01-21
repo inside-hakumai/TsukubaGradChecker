@@ -50,5 +50,8 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
+# Added mamually
+.env
+
 
 
