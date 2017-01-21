@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var imagemin = require('gulp-imagemin');
 
 // Sass compile
 gulp.task('sass', function () {
@@ -21,8 +22,14 @@ gulp.task('jsx', function () {
       .pipe(gulp.dest('./public/javascripts'));
 });
 
+gulp.task('image', function () {
+   gulp.src('./public/src/images/**/*.png')
+      .pipe(imagemin())
+      .pipe(gulp.dest('./public/images'));
+});
+
 gulp.task('watch', function () {
    gulp.watch('./public/src/jsx/*', ['jsx']);
 });
 
-gulp.task('default', ['sass', 'jsx', 'watch']);
+gulp.task('default', ['sass', 'jsx', 'image', 'watch']);

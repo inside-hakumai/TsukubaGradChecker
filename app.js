@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // configration for security
 app.use(helmet());
 app.use(session({
-   secret: process.env.SESSION_SECRET,
+   secret: process.env.SESSION_SECRET, // written in '/.env'
    resave: false,
    saveUninitialized: true
 }));

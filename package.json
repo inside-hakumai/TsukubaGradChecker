@@ -47,6 +47,7 @@
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
+    "gulp-imagemin": "^3.1.1",
     "gulp-sass": "^3.1.0",
     "nodemon": "^1.11.0",
     "vinyl": "^2.0.1",

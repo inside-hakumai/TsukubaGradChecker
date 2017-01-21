@@ -52,6 +52,7 @@ jspm_packages
 
 # Added mamually
 .env
-
+public/*
+!public/src/
 
 
