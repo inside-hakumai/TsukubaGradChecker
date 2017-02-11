@@ -4,4 +4,4 @@
 --> http://checker.insidehakumai.net
 
 ## 自分の取得単位データを使わず使ってみる
-/sampleのファイルを使用してください。
+取得単位データのサンプル([sample/sample_grade.csv](/sample/sample_grade.csv))を使用してください。
