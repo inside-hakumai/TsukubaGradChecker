@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <requirement 
-   xmlns="http://www.coins.tsukuba.ac.jp/s1411423/" 
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.coins.tsukuba.ac.jp/s1411423/ ./requirement.xsd">
+   xmlns="http://insidehakumai.net/ns/requirement"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://insidehakumai.net/ns/requirement requirement_schema.xsd">
    <MS>
       <required determined="true">
          <number>34</number>
@@ -235,9 +235,7 @@
          </unit>
          <unit type="multiple">
             <name>芸術</name>
-            <choices>
-               <match>^4</match>
-            </choices>
+            <match>^4</match>
             <number>
                <range>
                   <minimum>0</minimum>

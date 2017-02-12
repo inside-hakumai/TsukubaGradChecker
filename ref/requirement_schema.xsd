@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://insidehakumai.net/ns/requirement">
+
+    <xsd:element name="requirement">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="MS" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="FSM" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="GFS_common" minOccurs="1" maxOccurs="1"/>
+                <xsd:element ref="GFS_related" minOccurs="1" maxOccurs="1"/>
+                <xsd:element name="sumNumber" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="required" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="elective" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+                            <xsd:element name="free" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="MS" type="outerGroup"/>
+    <xsd:element name="FSM" type="outerGroup"/>
+    <xsd:element name="GFS_common" type="outerGroup"/>
+    <xsd:element name="GFS_related" type="outerGroup"/>
+
+    <xsd:complexType name="outerGroup">
+        <xsd:sequence>
+            <xsd:element ref="required" minOccurs="1" maxOccurs="1"/>
+            <xsd:element ref="elective" minOccurs="1" maxOccurs="1"/>
+            <xsd:element ref="free" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="required" type="innerGroup"/>
+    <xsd:element name="elective" type="innerGroup"/>
+    <xsd:element name="free" type="innerGroup"/>
+
+    <xsd:complexType name="innerGroup">
+        <xsd:sequence>
+            <xsd:element name="number" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+            <xsd:element ref="unit" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="determined" type="dtmAttr" use="optional"/>
+        <xsd:attribute name="addup" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="dtmAttr">
+        <xsd:restriction>
+            <xsd:enumeration value="true"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:element name="unit">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                <xsd:element name="match" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+                <xsd:element name="number" type="numberElem" minOccurs="1" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute name="type" type="typeAttr" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="numberElem">
+        <xsd:choice>
+            <xsd:element name="fixed" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="range">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="minimum" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+                        <xsd:element name="maximum" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:complexType>
+
+
+    <xsd:simpleType name="typeAttr">
+        <xsd:restriction>
+            <xsd:enumeration value="single"/>
+            <xsd:enumeration value="multiple"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+</xsd:schema>
