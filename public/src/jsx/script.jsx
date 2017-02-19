@@ -2,7 +2,16 @@
 
 $(function() {
    $('div.mdl-select > ul > li').click(function(e) {
-      var text = $(e.target).text();
-      $(e.target).parents('.mdl-select').addClass('is-dirty').children('input').val(text);
+      let text = $(e.target).text();
+      //noinspection JSUnresolvedFunction
+       $(e.target).parents('.mdl-select').addClass('is-dirty').children('input').val(text);
    });
+   resizeTitleArea();
+
+   $(window).resize(resizeTitleArea);
 });
+
+function resizeTitleArea() {
+   let height = $(window).height() - $('header').height();
+   $('#title').css('height', height + 'px');
+}

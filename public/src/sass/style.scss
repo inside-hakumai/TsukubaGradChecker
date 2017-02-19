@@ -2,12 +2,37 @@ main.mdl-layout__content {
    background-color: #FAFAFA;
 
    div#title {
-      h1 {
-         text-align: center;
-         font-weight: bold;
+      background: url(../images/title_bg_image.jpg);
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 60px;
+
+      div#title-text {
+         position: absolute;
+         top: 0;
+         margin: auto;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         height: 163px;
+         color: #FAFAFA;
+
+         h1 {
+            text-align: center;
+            font-weight: bold;
+         }
+         p {
+            text-align: center;
+         }
       }
-      p {
+      i#title-arrow{
+         position: absolute;
+         bottom: 40px;
+         left: 0;
+         right: 0;
          text-align: center;
+         color: #CACACA;
+         font-size: 80px;
       }
    }
 

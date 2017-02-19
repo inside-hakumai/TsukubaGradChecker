@@ -26,10 +26,14 @@ gulp.task('image', function () {
    gulp.src('./public/src/images/**/*.png')
       .pipe(imagemin())
       .pipe(gulp.dest('./public/images'));
+    gulp.src('./public/src/images/**/*.jpg')
+        .pipe(imagemin())
+        .pipe(gulp.dest('./public/images'));
 });
 
 gulp.task('watch', function () {
    gulp.watch('./public/src/jsx/*', ['jsx']);
 });
 
+gulp.task('compile', ['sass', 'jsx', 'image'])
 gulp.task('default', ['sass', 'jsx', 'image', 'watch']);
