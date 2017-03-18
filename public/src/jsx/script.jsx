@@ -1,6 +1,10 @@
 /* global $ */ // avoid ESLint warning
 
 $(function() {
+   window.onload = function(){
+      $('body').css('display', 'block');
+   };
+
    $('div.mdl-select > ul > li').click(function(e) {
       let text = $(e.target).text();
       //noinspection JSUnresolvedFunction
