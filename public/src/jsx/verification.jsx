@@ -1,8 +1,9 @@
 /* global $, React, ReactDOM */ // avoid ESList warning
 
+window.jQuery = window.$ = require(`jquery`);
+window.$.velocity = require('velocity-animate/velocity.js');
 var React = require('react');
 var ReactDOM = require('react-dom');
-var velocity = require('velocity-animate');
 
 const LARGE_CATEGORY = ["MS", "FSM", "GFS_common", "GFS_related"];
 const LARGE_CATEGORY_NAME = ["専門科目", "専門基礎科目", "基礎科目(共通科目)", "基礎科目(関連科目)"];

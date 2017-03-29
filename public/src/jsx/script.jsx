@@ -1,5 +1,7 @@
 /* global $ */ // avoid ESLint warning
 
+let $ = require(`jquery`);
+
 let window_height;
 
 $(document).ready(function () {
@@ -14,22 +16,21 @@ $(document).ready(function () {
    });
 });
 
-$(window).load(function () {
+$(window).on(`load`, function () {
    $('body').css('display', 'block');
 });
 
 function resizeTitleArea(e) {
-   console.log(e);
    window_height = $(window).height();
    $('#title').css('height', window_height + 'px');
 }
 
 function changeHeaderColorIfNeeded() {
-   if (changeHeaderColorIfNeeded.onTitleArea === undefined) {
-      changeHeaderColorIfNeeded.onTitleArea = !($('main.mdl-layout__content').scrollTop() < window_height);
-   }
-
    let onTitleAreaNow = $('main.mdl-layout__content').scrollTop() < window_height;
+
+   if (changeHeaderColorIfNeeded.onTitleArea === undefined) {
+      changeHeaderColorIfNeeded.onTitleArea = !onTitleAreaNow;
+   }
 
    if (onTitleAreaNow && !changeHeaderColorIfNeeded.onTitleArea) {
       $('header.mdl-layout__header.mdl-layout__header--transparent.is-casting-shadow').css('background-color', 'transparent');
