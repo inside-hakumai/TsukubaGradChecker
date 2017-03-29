@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build": "gulp & node ./bin/www"
+    "build": "gulp compile & node ./bin/www"
   },
   "repository": {
     "type": "git",

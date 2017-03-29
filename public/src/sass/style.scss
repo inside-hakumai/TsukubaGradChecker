@@ -1,9 +1,27 @@
+$header_font_color: rgb(250, 250, 250);
+
 body {
    display: none;
+
+   div.mdl-layout__drawer-button {
+      color: $header_font_color;
+   }
+
+   header.mdl-layout__header.mdl-layout__header--transparent.is-casting-shadow {
+      position: fixed;
+      color: $header_font_color;
+      transition: 0.5s;
+
+      div.mdl-layout__header-row {
+         a.mdl-navigation__link {
+            color: $header_font_color;
+         }
+      }
+   }
 }
 
 main.mdl-layout__content {
-   background-color: #FAFAFA;
+   background-color: $header_font_color;
 
    div#title {
       background: url(../images/title_bg_image.jpg);
@@ -19,7 +37,7 @@ main.mdl-layout__content {
          left: 0;
          right: 0;
          height: 163px;
-         color: #FAFAFA;
+         color: $header_font_color;
 
          h1 {
             text-align: center;
@@ -35,7 +53,7 @@ main.mdl-layout__content {
          left: 0;
          right: 0;
          text-align: center;
-         color: #CACACA;
+         color: $header_font_color;
          font-size: 80px;
       }
    }
