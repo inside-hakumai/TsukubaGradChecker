@@ -13,14 +13,14 @@ var user_grade_global = null;
 
 $(document).ready(function () {
    /*
-   ReactDOM.render(
-      <LargeCategory type={0}/>,
-      document.querySelector('#resultWrapper')
-   );
-   */
+    ReactDOM.render(
+    <LargeCategory type={0}/>,
+    document.querySelector('#resultWrapper')
+    );
+    */
 
    ReactDOM.render(
-      <InputForm noFile={false} />,
+      <InputForm noFile={false}/>,
       document.querySelector('#gettingstarted .react-render-area')
    );
 
@@ -33,26 +33,26 @@ $(document).ready(function () {
          user_grade.readGradeFile().then(function () {
             // console.log(user_grade);
             ReactDOM.render(
-               <InputForm noFile={false} />,
+               <InputForm noFile={false}/>,
                document.querySelector('#gettingstarted .react-render-area')
             );
             ReactDOM.render(
-               <Requirement collage={$('#collage').val()} />,
+               <Requirement collage={$('#collage').val()}/>,
                document.querySelector('#result .react-render-area')
             );
          });
       } else {
          // console.log(document.querySelectorAll('.input-form'));
          ReactDOM.render(
-            <InputForm noFile={true} />,
+            <InputForm noFile={true}/>,
             document.querySelector('#gettingstarted .react-render-area')
          );
          /*
-         ReactDOM.render(
-            <Alert />,
-            document.querySelectorAll('.input-form')[1]
-         );
-         */
+          ReactDOM.render(
+          <Alert />,
+          document.querySelectorAll('.input-form')[1]
+          );
+          */
       }
       user_grade_global = user_grade;
    });
@@ -132,7 +132,7 @@ class Requirement extends React.Component {
             padding: '0',
             margin: '0'
          }, {
-            easing: 'Linear',   
+            easing: 'Linear',
             duration: 700,
             delay: 10,
             complete: () => {
@@ -145,7 +145,7 @@ class Requirement extends React.Component {
                   duration: 2000,
                   complete: () => {
                      document.getElementById('result').style.height = 'auto';
-                  }   
+                  }
                });
             }
          });
@@ -155,10 +155,15 @@ class Requirement extends React.Component {
    render() {
       return (
          <div className="result-requirement">
-            <LargeCategory units={this.state.tree["MS"]} calAddupList={this.calAddupList} isInAddupList={this.isInAddupList} type={0} />
-            <LargeCategory units={this.state.tree["FSM"]} calAddupList={this.calAddupList} isInAddupList={this.isInAddupList} type={1} />
-            <LargeCategory units={this.state.tree["GFS_common"]} calAddupList={this.calAddupList} isInAddupList={this.isInAddupList} type={2} />
-            <LargeCategory units={this.state.tree["GFS_related"]} calAddupList={this.calAddupList} isInAddupList={this.isInAddupList} type={3} />
+            <LargeCategory units={this.state.tree["MS"]} calAddupList={this.calAddupList}
+                           isInAddupList={this.isInAddupList}
+                           type={0}/>
+            <LargeCategory units={this.state.tree["FSM"]} calAddupList={this.calAddupList}
+                           isInAddupList={this.isInAddupList} type={1}/>
+            <LargeCategory units={this.state.tree["GFS_common"]} calAddupList={this.calAddupList}
+                           isInAddupList={this.isInAddupList} type={2}/>
+            <LargeCategory units={this.state.tree["GFS_related"]} calAddupList={this.calAddupList}
+                           isInAddupList={this.isInAddupList} type={3}/>
          </div>
       );
    }
@@ -180,10 +185,10 @@ class Requirement extends React.Component {
             }).done(function (reqText) {
                resolve(reqText);
                /*
-               this.setState({
-                  classification: this.parseXML2JSON(reqText)
-               });
-               */
+                this.setState({
+                classification: this.parseXML2JSON(reqText)
+                });
+                */
             });
          });
       });
@@ -243,7 +248,7 @@ class Requirement extends React.Component {
                unitTree[lc]["determined"][index] = category.hasAttribute('determined');
                unitTree[lc]["addup"][index] = category.hasAttribute('addup');
 
-               if (category.hasAttribute('addup') && !unitTree.addupList.number ) {
+               if (category.hasAttribute('addup') && !unitTree.addupList.number) {
                   unitTree.addupList.number = parseFloat(category.querySelector('number').innerHTML);
                   unitTree.addupList.description = category.getAttribute('addup');
                }
@@ -294,10 +299,10 @@ class Requirement extends React.Component {
          // console.log(groupingList);
          // console.log(this.state.tree);
          /*
-         parentThis.setState({
-            tree: unitTree
-         });
-         */
+          parentThis.setState({
+          tree: unitTree
+          });
+          */
          console.log(unitTree);
          resolve([unitTree, groupingList]);
       });
@@ -307,9 +312,9 @@ class Requirement extends React.Component {
       let addupList = this.state.tree.addupList;
       let length = addupList.units.length;
       let sum = 0;
-      for (let i = 0; i < length; i++){
+      for (let i = 0; i < length; i++) {
          let cre_length = addupList["units"][i]["allocatedCredit"].length;
-         for (let j = 0; j < cre_length; j++){
+         for (let j = 0; j < cre_length; j++) {
             sum += parseFloat(addupList["units"][i]["allocatedCredit"][j].number);
          }
       }
@@ -319,7 +324,7 @@ class Requirement extends React.Component {
    isInAddupList(id) {
       let addupList = this.state.tree.addupList;
       let length = addupList.units.length;
-      for (let i = 0; i < length; i++){
+      for (let i = 0; i < length; i++) {
          if (addupList["units"][i].id == id) {
             return true;
          }
@@ -385,8 +390,7 @@ class Requirement extends React.Component {
                // console.log(allocation[index]);
                // console.log(credit.total);
                if (Boolean(allocation_credit[index]) != true &&
-                  rexp.test(credit.code) &&
-                  !this.unitIsFilled(unit, allocation_unit[unit.id]) &&
+                  rexp.test(credit.code) && !this.unitIsFilled(unit, allocation_unit[unit.id]) &&
                   credit.total != 'D') {
                   // console.log(unit);
                   // unit.allocatedCredit.push(credit);
@@ -412,8 +416,7 @@ class Requirement extends React.Component {
                // console.log(allocation[index]);
                // console.log(credit.total);
                if (Boolean(allocation_credit[index]) != true &&
-                  rexp.test(credit.code) &&
-                  !this.unitIsFilled(unit, allocation_unit[unit.id]) &&
+                  rexp.test(credit.code) && !this.unitIsFilled(unit, allocation_unit[unit.id]) &&
                   credit.total != 'D') {
                   // console.info(allocation_unit[unit.id], Boolean(allocation_unit[unit.id]));
                   if (allocation_unit[unit.id]) {
@@ -426,7 +429,7 @@ class Requirement extends React.Component {
                }
             }, parentThis);
          }, parentThis);
-         
+
          /*
           * 基礎共通科目の必修科目は1つの科目区分と1つの単位が定まるので先に確定
           */
@@ -436,8 +439,7 @@ class Requirement extends React.Component {
                // console.log(allocation[index]);
                // console.log(credit.total);
                if (Boolean(allocation_credit[index]) != true &&
-                  rexp.test(credit.code) &&
-                  !this.unitIsFilled(unit, allocation_unit[unit.id]) &&
+                  rexp.test(credit.code) && !this.unitIsFilled(unit, allocation_unit[unit.id]) &&
                   credit.total != 'D') {
                   // console.info(allocation_unit[unit.id], Boolean(allocation_unit[unit.id]));
                   if (allocation_unit[unit.id]) {
@@ -454,7 +456,7 @@ class Requirement extends React.Component {
          // console.info(allocation_unit);
          // console.info(allocation_credit);
 
-         
+
          /*
           * 割り当てが定まらなかった単位を抽出
           */
@@ -475,8 +477,7 @@ class Requirement extends React.Component {
             var allocatableUnits = [];
             unitList.forEach((unit) => {
                let rexp = new RegExp(unit.match);
-               if (rexp.test(credit.code) &&
-                  !this.unitIsFilled(unit) &&
+               if (rexp.test(credit.code) && !this.unitIsFilled(unit) &&
                   credit.total != 'D') {
                   allocatableUnits.push(unit);
                }
@@ -504,16 +505,16 @@ class Requirement extends React.Component {
          //getAllocationPatternNew();
 
          /*
-         各ユニットに割り当てる単位の単位数を記録する多次元配列。
-         1次元目のインデックスはグループ番号、各要素には2次元が格納されており、
-         その0個目の配列は対象のユニットidを並べた配列、1個目以降に各パターンにおけるユニット毎の単位数を並べた配列を含む2次元配列が格納されている
-         */
+          各ユニットに割り当てる単位の単位数を記録する多次元配列。
+          1次元目のインデックスはグループ番号、各要素には2次元が格納されており、
+          その0個目の配列は対象のユニットidを並べた配列、1個目以降に各パターンにおけるユニット毎の単位数を並べた配列を含む2次元配列が格納されている
+          */
          var creditSumPattern = new Array();
          /*
-         各ユニットに割り当てる単位のidを記録する多次元次元配列。
-         1次元目のインデックスはグループ番号、各要素には2次元が格納されており、
-         その0個目の配列は対象のユニットidを並べた配列、1個目以降に各パターンにおけるユニット毎の割り当て単位を並べた配列の配列が格納されている
-         */
+          各ユニットに割り当てる単位のidを記録する多次元次元配列。
+          1次元目のインデックスはグループ番号、各要素には2次元が格納されており、
+          その0個目の配列は対象のユニットidを並べた配列、1個目以降に各パターンにおけるユニット毎の割り当て単位を並べた配列の配列が格納されている
+          */
          var creditAllocationPattern = new Array();
 
          // グループでループ
@@ -543,62 +544,62 @@ class Requirement extends React.Component {
 
             // グループ内の割り当てパターンでループ
             loop:
-            for (let j = 0; j < Math.pow(targetGroup.units.length, targetGroup.credits.length); j++) {
+               for (let j = 0; j < Math.pow(targetGroup.units.length, targetGroup.credits.length); j++) {
 
-               // console.info("%cpattern " + j + " of " + Math.pow(targetGroup.units.length, targetGroup.credits.length), 'font-weight: bold');
-               // console.info(targetGroup);
+                  // console.info("%cpattern " + j + " of " + Math.pow(targetGroup.units.length, targetGroup.credits.length), 'font-weight: bold');
+                  // console.info(targetGroup);
 
-               // 科目分類数の進数表現を利用して各単位を割り当てる科目分類を表現
-               var combination;
-               if (targetGroup.units.length > 1) {
-                  combination = (paddinger + j.toString(targetGroup.units.length)).slice(-1 * targetGroup.credits.length);
-               } else {
-                  combination = paddinger;
-               }
+                  // 科目分類数の進数表現を利用して各単位を割り当てる科目分類を表現
+                  var combination;
+                  if (targetGroup.units.length > 1) {
+                     combination = (paddinger + j.toString(targetGroup.units.length)).slice(-1 * targetGroup.credits.length);
+                  } else {
+                     combination = paddinger;
+                  }
 
-               /*
-                * 各ユニットごとに割り当てる単位および単位数を算出
-                */
-               var allocation = new Array(targetGroup.units.length);
-               var creditSum = new Array(targetGroup.units.length);
-               // 初期化
-               for (let k = 0; k < creditSum.length; k++) {
-                  creditSum[k] = 0;
-                  allocation[k] = [];
-               }
-               // 割り当てる単位・単位数を算出
-               for (let k = 0; k < combination.length; k++) {
-                  let unitNum = parseInt(combination.charAt(k), 10);
-                  // console.info(unitNum);
-                  creditSum[unitNum] += parseFloat(targetGroup.credits[k].number);
-                  allocation[unitNum].push(targetGroup.credits[k].id);
-               }
-               // 算出した単位数の組み合わせが既存の組み合わせと被る場合は結果に追加せずスキップ
-               for (let k = 1; k < creditSumPattern[i].length; k++) {
-                  if (creditSumPattern[i][k].toString() == creditSum.toString()) {
+                  /*
+                   * 各ユニットごとに割り当てる単位および単位数を算出
+                   */
+                  var allocation = new Array(targetGroup.units.length);
+                  var creditSum = new Array(targetGroup.units.length);
+                  // 初期化
+                  for (let k = 0; k < creditSum.length; k++) {
+                     creditSum[k] = 0;
+                     allocation[k] = [];
+                  }
+                  // 割り当てる単位・単位数を算出
+                  for (let k = 0; k < combination.length; k++) {
+                     let unitNum = parseInt(combination.charAt(k), 10);
+                     // console.info(unitNum);
+                     creditSum[unitNum] += parseFloat(targetGroup.credits[k].number);
+                     allocation[unitNum].push(targetGroup.credits[k].id);
+                  }
+                  // 算出した単位数の組み合わせが既存の組み合わせと被る場合は結果に追加せずスキップ
+                  for (let k = 1; k < creditSumPattern[i].length; k++) {
+                     if (creditSumPattern[i][k].toString() == creditSum.toString()) {
+                        continue loop;
+                     }
+                  }
+                  // パターン数削減のため、ユニットの必要単位数を超過している単位数が一番少ないパターン以外は除外
+                  let _overflowCount = 0;
+                  for (let k = 0; k < creditSum.length; k++) {
+                     let _maximumNum = (targetGroup.units[k].number.hasRange) ? (targetGroup.units[k].number.maximum) : (targetGroup.units[k].number.number);
+                     _overflowCount = (Math.max(_overflowCount, (creditSum[k] - _maximumNum)));
+                  }
+                  if (_overflowCount < _bestOverflowNum) {
+                     creditSumPattern[i] = [];
+                     creditSumPattern[i][0] = idList;
+                     creditAllocationPattern[i] = [];
+                     creditAllocationPattern[i][0] = idList;
+                     _bestOverflowNum = _overflowCount;
+                  } else if (_overflowCount > _bestOverflowNum) {
                      continue loop;
                   }
-               }
-               // パターン数削減のため、ユニットの必要単位数を超過している単位数が一番少ないパターン以外は除外
-               let _overflowCount = 0;
-               for (let k = 0; k < creditSum.length; k++){
-                  let _maximumNum = (targetGroup.units[k].number.hasRange) ? (targetGroup.units[k].number.maximum) : (targetGroup.units[k].number.number);
-                  _overflowCount = (Math.max(_overflowCount, (creditSum[k] - _maximumNum)));
-               }
-               if (_overflowCount < _bestOverflowNum) {
-                  creditSumPattern[i] = [];
-                  creditSumPattern[i][0] = idList;
-                  creditAllocationPattern[i] = [];
-                  creditAllocationPattern[i][0] = idList;
-                  _bestOverflowNum = _overflowCount;
-               } else if (_overflowCount > _bestOverflowNum) {
-                  continue loop;
-               }
 
-               // 結果に追加
-               creditSumPattern[i].push(creditSum);
-               creditAllocationPattern[i].push(allocation);
-            }
+                  // 結果に追加
+                  creditSumPattern[i].push(creditSum);
+                  creditAllocationPattern[i].push(allocation);
+               }
          }
 
          /*
@@ -606,7 +607,6 @@ class Requirement extends React.Component {
           */
 
          getWholeAllocation([], creditSumPattern, creditAllocationPattern);
-
 
 
          // console.info(getWholeAllocation.bestPattern);
@@ -617,11 +617,11 @@ class Requirement extends React.Component {
 
          // console.info(creditAllocationPattern);
 
-         for (let i = 0; i < resultPattern.length; i++){
+         for (let i = 0; i < resultPattern.length; i++) {
             var patternNum = resultPattern[i];
             // console.info(creditAllocationPattern[i][0]);
             var unitIdList = creditAllocationPattern[i][0];
-            for (let j = 0; j < unitIdList.length; j++){
+            for (let j = 0; j < unitIdList.length; j++) {
                // console.info(creditAllocationPattern[i][patternNum][j]);
                // console.info(user_grade_global.creditList[creditAllocationPattern[i][patternNum][j]]);
                for (let k = 0; k < creditAllocationPattern[i][patternNum][j].length; k++) {
@@ -629,30 +629,30 @@ class Requirement extends React.Component {
                }
             }
          }
-   
+
          // console.info(user_grade_global.creditList);
-   
+
          for (let unitId in allocation_unit) {
             for (let j = 0; j < allocation_unit[unitId].length; j++) {
                unitList[unitId].allocatedCredit.push(user_grade_global.creditList[allocation_unit[unitId][j]]);
             }
          }
-   
+
          // console.info(units);
          // console.info(unitList);
-   
+
          this.setState({
             tree: units
          });
 
          // console.log("done");
          resolve();
-      });   
+      });
 
       function getWholeAllocation(premisePatterns, creditSumPattern) {
          // console.group();
          // console.info('getAllocationPattern() is called. premisePatterns:\n' + JSON.stringify(premisePatterns, null, '\t'));
-         
+
          if (typeof getWholeAllocation.patternLink === 'undefined') {
             getWholeAllocation.patternLink = {};
          }
@@ -661,7 +661,7 @@ class Requirement extends React.Component {
          }
          if (typeof getWholeAllocation.overflowCredits === 'undefined') {
             getWholeAllocation.overflowCredits = new Array(10);
-            for (let i = 0; i < 10; i++){
+            for (let i = 0; i < 10; i++) {
                getWholeAllocation.overflowCredits[i] = 999;
             }
          }
@@ -672,8 +672,8 @@ class Requirement extends React.Component {
 
          // 1つ前のグループまでで確定したユニットと単位の組み合わせを抽出
          var premiseAllocation = {}
-         for (let i = 0; i < premisePatterns.length; i++){
-            for (let j = 0; j < creditSumPattern[i][premisePatterns[i]].length; j++){
+         for (let i = 0; i < premisePatterns.length; i++) {
+            for (let j = 0; j < creditSumPattern[i][premisePatterns[i]].length; j++) {
                if (!premiseAllocation[creditSumPattern[i][0][j]]) {
                   premiseAllocation[creditSumPattern[i][0][j]] = parseFloat(creditSumPattern[i][premisePatterns[i]][j]);
                } else {
@@ -684,7 +684,7 @@ class Requirement extends React.Component {
 
          // 再帰の末尾まで達した場合
          if (allocationGroups_global.length == groupIndex) {
-            // console.info("maximum depth reached.");            
+            // console.info("maximum depth reached.");
             // getWholeAllocation.bestPattern.push(premisePatterns);
             // console.groupEnd();
 
@@ -693,9 +693,9 @@ class Requirement extends React.Component {
                var _maximumNum = (unitList[key].number.hasRange) ? (unitList[key].number.maximum) : (unitList[key].number.number);
                _overflowCount += (Math.max(0, (premiseAllocation[key] - _maximumNum)));
             }
-   
+
             var maxItemCount = Math.max.apply(null, getWholeAllocation.overflowCredits);
-            
+
             // console.info(_overflowCount);
 
             if (_overflowCount <= maxItemCount) {
@@ -705,7 +705,7 @@ class Requirement extends React.Component {
             }
 
             // console.info(getWholeAllocation.bestPattern);
-                   
+
             return;
          }
 
@@ -713,38 +713,38 @@ class Requirement extends React.Component {
 
          // 現グループの各パターンでループ
          loop:
-         for (let i = 1; i < creditSumPattern[groupIndex].length; i++){
+            for (let i = 1; i < creditSumPattern[groupIndex].length; i++) {
 
-            var currentAllocation = parentThis.clone(premiseAllocation);
+               var currentAllocation = parentThis.clone(premiseAllocation);
 
-            for (let j = 0; j < creditSumPattern[groupIndex][i].length; j++){
-               if (!currentAllocation[creditSumPattern[groupIndex][0][j]]) {
-                  currentAllocation[creditSumPattern[groupIndex][0][j]] = parseFloat(creditSumPattern[groupIndex][i][j]);
-               } else {
-                  currentAllocation[creditSumPattern[groupIndex][0][j]] += parseFloat(creditSumPattern[groupIndex][i][j]);
+               for (let j = 0; j < creditSumPattern[groupIndex][i].length; j++) {
+                  if (!currentAllocation[creditSumPattern[groupIndex][0][j]]) {
+                     currentAllocation[creditSumPattern[groupIndex][0][j]] = parseFloat(creditSumPattern[groupIndex][i][j]);
+                  } else {
+                     currentAllocation[creditSumPattern[groupIndex][0][j]] += parseFloat(creditSumPattern[groupIndex][i][j]);
+                  }
                }
+
+               // console.info(currentAllocation);
+
+               var overflowCount = 0;
+               for (let key in currentAllocation) {
+                  var maximumNum = (unitList[key].number.hasRange) ? (unitList[key].number.maximum) : (unitList[key].number.number);
+                  overflowCount += (Math.max(0, (currentAllocation[key] - maximumNum)));
+               }
+
+               // console.info(overflowCount);
+
+               if (overflowCount >= Math.max.apply(null, getWholeAllocation.overflowCredits)) {
+                  continue loop;
+               }
+
+               var nextPattern = [].concat(premisePatterns);
+               nextPattern.push(i);
+
+               getWholeAllocation(nextPattern, creditSumPattern);
+
             }
-
-            // console.info(currentAllocation);
-
-            var overflowCount = 0;
-            for (let key in currentAllocation) {
-               var maximumNum = (unitList[key].number.hasRange) ? (unitList[key].number.maximum) : (unitList[key].number.number);
-               overflowCount += (Math.max(0, (currentAllocation[key] - maximumNum)));
-            }
-
-            // console.info(overflowCount);
-
-            if (overflowCount >= Math.max.apply(null, getWholeAllocation.overflowCredits)) {
-               continue loop;
-            }
-
-            var nextPattern = [].concat(premisePatterns);
-            nextPattern.push(i);
-
-            getWholeAllocation(nextPattern, creditSumPattern);
-
-         }
       }
    }
 
@@ -755,7 +755,7 @@ class Requirement extends React.Component {
          creditSum[i] = 0;
 
       // ユニット毎に割り当てた単位数を算出
-      for (let i = 0; i < combination; i++){
+      for (let i = 0; i < combination; i++) {
          let unitNum = parseInt(combination.charAt(i), 10);
          creditSum[unitNum] += parseFloat(targetGroup.credits[i].number);
       }
@@ -821,7 +821,11 @@ class LargeCategory extends React.Component {
                      (() => {
                         if (this.props.units["required"].length != 0) {
                            return (
-                              <SmallCategory units={this.props.units["required"]} calAddupList={this.props.calAddupList} isInAddupList={this.props.isInAddupList} determined={this.props.units["determined"][0]} addup={this.props.units["addup"][0]} parentType={this.props.type} type={0} /> 
+                              <SmallCategory units={this.props.units["required"]} calAddupList={this.props.calAddupList}
+                                             isInAddupList={this.props.isInAddupList}
+                                             determined={this.props.units["determined"][0]}
+                                             addup={this.props.units["addup"][0]}
+                                             parentType={this.props.type} type={0}/>
                            );
                         }
                      })()
@@ -830,7 +834,11 @@ class LargeCategory extends React.Component {
                      (() => {
                         if (this.props.units["elective"].length != 0) {
                            return (
-                              <SmallCategory units={this.props.units["elective"]} calAddupList={this.props.calAddupList} isInAddupList={this.props.isInAddupList} determined={this.props.units["determined"][1]} addup={this.props.units["addup"][1]} parentType={this.props.type} type={1} />
+                              <SmallCategory units={this.props.units["elective"]} calAddupList={this.props.calAddupList}
+                                             isInAddupList={this.props.isInAddupList}
+                                             determined={this.props.units["determined"][1]}
+                                             addup={this.props.units["addup"][1]}
+                                             parentType={this.props.type} type={1}/>
                            );
                         }
                      })()
@@ -839,7 +847,11 @@ class LargeCategory extends React.Component {
                      (() => {
                         if (this.props.units["free"].length != 0) {
                            return (
-                              <SmallCategory units={this.props.units["free"]} calAddupList={this.props.calAddupList} isInAddupList={this.props.isInAddupList} determined={this.props.units["determined"][2]} addup={this.props.units["addup"][2]} parentType={this.props.type} type={2} />
+                              <SmallCategory units={this.props.units["free"]} calAddupList={this.props.calAddupList}
+                                             isInAddupList={this.props.isInAddupList}
+                                             determined={this.props.units["determined"][2]}
+                                             addup={this.props.units["addup"][2]}
+                                             parentType={this.props.type} type={2}/>
                            );
                         }
                      })()
@@ -882,11 +894,11 @@ class SmallCategory extends React.Component {
                         status_class = "unfilled";
                      }
                      return (
-                        <div className={status_class + " mdl-card mdl-shadow--4dp addup-info"}> 
-                           <div className="mdl-card__supporting-text">   
+                        <div className={status_class + " mdl-card mdl-shadow--4dp addup-info"}>
+                           <div className="mdl-card__supporting-text">
                               <span>{addupDescription}</span>{addupStatus}
                            </div>
-                        </div>   
+                        </div>
                      );
                   }
                })()
@@ -899,22 +911,23 @@ class SmallCategory extends React.Component {
                         if (this.props.determined) {
                            // console.info(this.props.units);
                            return (
-                              <table id={idName + "-result"} className="mdl-data-table mdl-js-data-table mdl-shadow--2dp result-table">
+                              <table id={idName + "-result"}
+                                     className="mdl-data-table mdl-js-data-table mdl-shadow--2dp result-table">
                                  <thead>
-                                    <tr>
-                                       <th className="mdl-data-table__cell--non-numeric">科目名</th>
-                                       <th>単位数</th>
-                                       <th>状態</th>
-                                    </tr>
+                                 <tr>
+                                    <th className="mdl-data-table__cell--non-numeric">科目名</th>
+                                    <th>単位数</th>
+                                    <th>状態</th>
+                                 </tr>
                                  </thead>
                                  <tbody>
-                                    {
-                                       this.props.units.map(function (unit) {
-                                          return (
-                                             <Unit determined={true} key={unit["id"]} data={unit} />
-                                          );
-                                       })
-                                    }   
+                                 {
+                                    this.props.units.map(function (unit) {
+                                       return (
+                                          <Unit determined={true} key={unit["id"]} data={unit}/>
+                                       );
+                                    })
+                                 }
                                  </tbody>
                               </table>
                            );
@@ -924,7 +937,10 @@ class SmallCategory extends React.Component {
                                  {
                                     this.props.units.map(function (unit) {
                                        return (
-                                          <Unit calAddupList={parentThis.props.calAddupList} isInAddupList={parentThis.props.isInAddupList} determined={false} key={unit["id"]} data={unit} />
+                                          <Unit calAddupList={parentThis.props.calAddupList}
+                                                isInAddupList={parentThis.props.isInAddupList} determined={false}
+                                                key={unit["id"]}
+                                                data={unit}/>
                                        );
                                     })
                                  }
@@ -953,10 +969,22 @@ class Unit extends React.Component {
       this.hasRange = this.hasRange.bind(this);
    }
 
-   get id() { return this.props.data.id }
-   get match() { return this.props.data.match; }
-   get code() { return this.props.data.code; }
-   get name() { return this.props.data.name; }
+   get id() {
+      return this.props.data.id
+   }
+
+   get match() {
+      return this.props.data.match;
+   }
+
+   get code() {
+      return this.props.data.code;
+   }
+
+   get name() {
+      return this.props.data.name;
+   }
+
    get number() {
       if (this.props.data.number.hasRange) {
          return parseFloat(this.props.data.number["maximum"]);
@@ -966,12 +994,12 @@ class Unit extends React.Component {
    }
 
    /*
-   addCredit(credit) {
-      this.setState({
-         credits: this.state.credits.concat(credit)
-      });
-   }
-   */
+    addCredit(credit) {
+    this.setState({
+    credits: this.state.credits.concat(credit)
+    });
+    }
+    */
 
    hasRange() {
       return Boolean(this.props.data.number.hasRange);
@@ -989,7 +1017,7 @@ class Unit extends React.Component {
    allocatedCreditSum() {
       let sum = 0;
       let length = this.props.data["allocatedCredit"].length
-      for (let i = 0; i < length; i++){
+      for (let i = 0; i < length; i++) {
          sum += parseFloat(this.props.data["allocatedCredit"][i].number);
       }
       return sum;
@@ -1037,70 +1065,74 @@ class Unit extends React.Component {
          return (
             <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp result-table">
                <thead className={status}>
-                  <tr>
-                     <th className="mdl-data-table__cell--non-numeric col-header" colSpan="2">{this.props.data["name"]}</th>
-                  </tr>
-                  <tr>
-                     <th className="mdl-data-table__cell--non-numeric col-header" colSpan="2">取得単位数 : {this.allocatedCreditSum()} / 必要単位数 : {this.numToString()}</th>
-                  </tr>
-                  {
-                     (() => {
-                        if (this.props.data["allocatedCredit"].length != 0) {
-                           return (
-                              <tr>
-                                 <th className="mdl-data-table__cell--non-numeric">単位名</th>
-                                 <th>単位数</th>
-                              </tr>
-                           );
-                        }
-                     })()
-                  }
-               </thead>
-               <tbody>
-                  {
-                     (() => { 
-                        if (this.props.data["allocatedCredit"].length == 0) {
-                           return (
-                              <tr>
-                                 <td className="mdl-data-table__cell--non-numeric" colSpan="2">割り当て単位なし</td>
-                              </tr>
-                           );
-                        }
-                     })()
-                  }
-                  {
-                     this.props.data["allocatedCredit"].map(function (credit) {
-                        // console.info(credit);
+               <tr>
+                  <th className="mdl-data-table__cell--non-numeric col-header"
+                      colSpan="2">{this.props.data["name"]}</th>
+               </tr>
+               <tr>
+                  <th className="mdl-data-table__cell--non-numeric col-header" colSpan="2">取得単位数
+                     : {this.allocatedCreditSum()}
+                     / 必要単位数 : {this.numToString()}</th>
+               </tr>
+               {
+                  (() => {
+                     if (this.props.data["allocatedCredit"].length != 0) {
                         return (
-                           <tr key={credit.id + credit.code}>
-                              <td className="mdl-data-table__cell--non-numeric" key={credit.id + credit.code + "-name"}>{credit.title}</td>
-                              <td key={credit.id + credit.code + "-number"}>{credit.number}</td>
+                           <tr>
+                              <th className="mdl-data-table__cell--non-numeric">単位名</th>
+                              <th>単位数</th>
                            </tr>
                         );
-                     })
-                  }
+                     }
+                  })()
+               }
+               </thead>
+               <tbody>
+               {
+                  (() => {
+                     if (this.props.data["allocatedCredit"].length == 0) {
+                        return (
+                           <tr>
+                              <td className="mdl-data-table__cell--non-numeric" colSpan="2">割り当て単位なし</td>
+                           </tr>
+                        );
+                     }
+                  })()
+               }
+               {
+                  this.props.data["allocatedCredit"].map(function (credit) {
+                     // console.info(credit);
+                     return (
+                        <tr key={credit.id + credit.code}>
+                           <td className="mdl-data-table__cell--non-numeric"
+                               key={credit.id + credit.code + "-name"}>{credit.title}</td>
+                           <td key={credit.id + credit.code + "-number"}>{credit.number}</td>
+                        </tr>
+                     );
+                  })
+               }
                </tbody>
             </table>
             /*
-            <div id={"row-unit" + this.props.data["id"]} className="item-unit">
-               <div className="row">
-                  <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">{this.props.data["name"]}</div>
-                  <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">{this.numToString()}</div>
-               </div>
-               <div className="allocated-credit">
-                  {
-                     this.props.data["allocatedCredit"].map(function (credit) {
-                        return (
-                           <div key={credit.id + credit.code} className="row">
-                              <div className="col-xs-offset-1 col-sm-offset-1 col-xs-4 col-sm-4 col-md-4 col-lg-4" key={credit.id + credit.code + "-name"}>{credit.title}</div>
-                              <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4" key={credit.id + credit.code + "-number"}>{credit.number}</div>
-                           </div>
-                        );
-                     })
-                  }
-               </div>
-            </div>
-            */
+             <div id={"row-unit" + this.props.data["id"]} className="item-unit">
+             <div className="row">
+             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">{this.props.data["name"]}</div>
+             <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">{this.numToString()}</div>
+             </div>
+             <div className="allocated-credit">
+             {
+             this.props.data["allocatedCredit"].map(function (credit) {
+             return (
+             <div key={credit.id + credit.code} className="row">
+             <div className="col-xs-offset-1 col-sm-offset-1 col-xs-4 col-sm-4 col-md-4 col-lg-4" key={credit.id + credit.code + "-name"}>{credit.title}</div>
+             <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4" key={credit.id + credit.code + "-number"}>{credit.number}</div>
+             </div>
+             );
+             })
+             }
+             </div>
+             </div>
+             */
          );
       }
    }
@@ -1209,7 +1241,9 @@ class Alert extends React.Component {
       if (this.state.noFile) {
          return (
             <div className="alert alert-danger">
-               <strong>Oh snap!</strong> <a href="#" className="alert-link">Change a few things up</a> and try submitting again.
+               <strong>Oh snap!</strong> <a href="#" className="alert-link">Change a few things up</a> and try
+               submitting
+               again.
             </div>
          );
       } else {
@@ -1236,19 +1270,21 @@ class InputForm extends React.Component {
          noFile: nextProps.noFile
       });
    }
-   
+
    render() {
       return (
          <div id="input-form-wrapper">
             <div className="mdl-grid">
                <CollageSelector />
-               <FileForm noFile={this.state.noFile} />
+               <FileForm noFile={this.state.noFile}/>
             </div>
             <div className="mdl-grid">
                <div id="check-button-wrapper" className="mdl-cell mdl-cell--12-col">
-                  <button id="check-button" className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Check!</button>
-               </div>   
-            </div>   
+                  <button id="check-button" className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                     Check!
+                  </button>
+               </div>
+            </div>
          </div>
       );
    }
@@ -1261,10 +1297,10 @@ function CollageSelector() {
          <p>1. 入学年度・学類を選択します</p>
          <div id="collage-input-wrapper" className="mdl-textfield mdl-js-textfield">
             <select className="mdl-textfield__input" id="collage">
-               <option value="coins_26_software">情報科学類 / H26年度入学 / ソフトウェアサイエンス主専攻</option>   
+               <option value="coins_26_software">情報科学類 / H26年度入学 / ソフトウェアサイエンス主専攻</option>
                <option value="coins_26_jyoshisu">情報科学類 / H26年度入学 /情報システム主専攻</option>
                <option value="coins_26_intelligence">情報科学類 / H26年度入学 / 知能情報メディア主専攻</option>
-               <option value="coins_27_software">情報科学類 / H27年度以降入学 / ソフトウェアサイエンス主専攻</option>   
+               <option value="coins_27_software">情報科学類 / H27年度以降入学 / ソフトウェアサイエンス主専攻</option>
                <option value="coins_27_jyoshisu">情報科学類 / H27年度以降入学 /情報システム主専攻</option>
                <option value="coins_27_intelligence">情報科学類 / H27年度以降入学 / 知能情報メディア主専攻</option>
             </select>
@@ -1301,10 +1337,13 @@ class FileForm extends React.Component {
       return (
          <div className="mdl-cell mdl-cell--6-col">
             <p>2. 履修科目データのCSVを選択します</p>
-            <input type="file" id="fileSelecter" className="form-contorl" style={{ display: "none" }}></input>
-            <div id="file-input-wrapper">                           
-               <button type="button" id="file-select-icon" className="mdl-button mdl-js-button" onClick={this.selectFile}><i className="material-icons">file_upload</i></button>
-               <input type="text" id="fileName" placeholder="Select file ..." readOnly value={this.state.fileName}></input>
+            <input type="file" id="fileSelecter" className="form-contorl" style={{display: "none"}}></input>
+            <div id="file-input-wrapper">
+               <button type="button" id="file-select-icon" className="mdl-button mdl-js-button"
+                       onClick={this.selectFile}><i
+                  className="material-icons">file_upload</i></button>
+               <input type="text" id="fileName" placeholder="Select file ..." readOnly
+                      value={this.state.fileName}></input>
             </div>
          </div>
       );

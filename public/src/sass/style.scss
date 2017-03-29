@@ -47,7 +47,7 @@ main.mdl-layout__content {
             text-align: center;
          }
       }
-      i#title-arrow{
+      i#title-arrow {
          position: absolute;
          bottom: 40px;
          left: 0;
@@ -58,20 +58,20 @@ main.mdl-layout__content {
       }
    }
 
-   div.mdl-card__title+div.mdl-card__supporting-text {
+   div.mdl-card__title + div.mdl-card__supporting-text {
       padding-top: 0;
    }
 
    div#about, div#howtouse, div#caution, div#others, div#faq {
 
       div.mdl-card {
-         width: 100%; 
+         width: 100%;
       }
 
       h2.mdl-card__title-text {
          line-height: 40px;
          font-weight: bold;
-         
+
          i.material-icons {
             line-height: 40px;
          }
@@ -198,10 +198,10 @@ main.mdl-layout__content {
             color: #000000;
             font-weight: bold;
          }
-         thead.filled>tr>th.col-header {
+         thead.filled > tr > th.col-header {
             background: #CEFFD6;
          }
-         thead.unfilled>tr>th.col-header {
+         thead.unfilled > tr > th.col-header {
             background: #FFCECE;
          }
       }
