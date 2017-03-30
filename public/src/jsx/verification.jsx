@@ -1,14 +1,17 @@
 /* global $, React, ReactDOM */ // avoid ESList warning
 
-window.jQuery = window.$ = require(`jquery`);
+window.jQuery = window.$ = require('jquery');
 window.$.velocity = require('velocity-animate/velocity.js');
-var React = require('react');
-var ReactDOM = require('react-dom');
+let React = require('react');
+let ReactDOM = require('react-dom');
+let FileForm = require('./FileForm.jsx');
+let InputForm = require('./InputForm.jsx');
+let CollageSelector = require('./CollageSelector.jsx');
 
-const LARGE_CATEGORY = ["MS", "FSM", "GFS_common", "GFS_related"];
-const LARGE_CATEGORY_NAME = ["専門科目", "専門基礎科目", "基礎科目(共通科目)", "基礎科目(関連科目)"];
-const SMALL_CATEGORY = ["required", "elective", "free"];
-const SMALL_CATEGORY_NAME = ["必修科目", "選択科目", "自由科目"];
+const LARGE_CATEGORY = ['MS', 'FSM', 'GFS_common', 'GFS_related'];
+const LARGE_CATEGORY_NAME = ['専門科目', '専門基礎科目', '基礎科目(共通科目)', '基礎科目(関連科目)'];
+const SMALL_CATEGORY = ['required', 'elective', 'free'];
+const SMALL_CATEGORY_NAME = ['必修科目', '選択科目', '自由科目'];
 
 var user_grade_global = null;
 
@@ -155,15 +158,15 @@ class Requirement extends React.Component {
 
    render() {
       return (
-         <div className="result-requirement">
-            <LargeCategory units={this.state.tree["MS"]} calAddupList={this.calAddupList}
+         <div className='result-requirement'>
+            <LargeCategory units={this.state.tree['MS']} calAddupList={this.calAddupList}
                            isInAddupList={this.isInAddupList}
                            type={0}/>
-            <LargeCategory units={this.state.tree["FSM"]} calAddupList={this.calAddupList}
+            <LargeCategory units={this.state.tree['FSM']} calAddupList={this.calAddupList}
                            isInAddupList={this.isInAddupList} type={1}/>
-            <LargeCategory units={this.state.tree["GFS_common"]} calAddupList={this.calAddupList}
+            <LargeCategory units={this.state.tree['GFS_common']} calAddupList={this.calAddupList}
                            isInAddupList={this.isInAddupList} type={2}/>
-            <LargeCategory units={this.state.tree["GFS_related"]} calAddupList={this.calAddupList}
+            <LargeCategory units={this.state.tree['GFS_related']} calAddupList={this.calAddupList}
                            isInAddupList={this.isInAddupList} type={3}/>
          </div>
       );
@@ -246,8 +249,8 @@ class Requirement extends React.Component {
                let category = dom.querySelector('requirement > ' + lc + '>' + sc);
                let addup = false;
 
-               unitTree[lc]["determined"][index] = category.hasAttribute('determined');
-               unitTree[lc]["addup"][index] = category.hasAttribute('addup');
+               unitTree[lc]['determined'][index] = category.hasAttribute('determined');
+               unitTree[lc]['addup'][index] = category.hasAttribute('addup');
 
                if (category.hasAttribute('addup') && !unitTree.addupList.number) {
                   unitTree.addupList.number = parseFloat(category.querySelector('number').innerHTML);
@@ -261,7 +264,7 @@ class Requirement extends React.Component {
                dom.querySelectorAll('requirement > ' + lc + ' > ' + sc + ' > unit').forEach(function (unit) {
 
                   var unitJSON;
-                  if (unit.getElementsByTagName("range").length == 0) {
+                  if (unit.getElementsByTagName('range').length == 0) {
                      unitJSON = {
                         id: unitIDHead++,
                         name: unit.querySelector('name').innerHTML,
@@ -271,10 +274,10 @@ class Requirement extends React.Component {
                            number: unit.querySelector('number').innerHTML,
                         },
                         allocatedCredit: []
-                     }
+                     };
                   } else {
-                     let numMin = unit.getElementsByTagName("minimum")[0].innerHTML;
-                     let numMax = unit.getElementsByTagName("maximum")[0].innerHTML;
+                     let numMin = unit.getElementsByTagName('minimum')[0].innerHTML;
+                     let numMax = unit.getElementsByTagName('maximum')[0].innerHTML;
                      unitJSON = {
                         id: unitIDHead++,
                         name: unit.querySelector('name').innerHTML,
@@ -285,7 +288,7 @@ class Requirement extends React.Component {
                            maximum: numMax
                         },
                         allocatedCredit: []
-                     }
+                     };
                   }
                   groupingList.push(unitJSON);
                   unitTree[lc][sc].push(unitJSON);
@@ -314,9 +317,9 @@ class Requirement extends React.Component {
       let length = addupList.units.length;
       let sum = 0;
       for (let i = 0; i < length; i++) {
-         let cre_length = addupList["units"][i]["allocatedCredit"].length;
+         let cre_length = addupList['units'][i]['allocatedCredit'].length;
          for (let j = 0; j < cre_length; j++) {
-            sum += parseFloat(addupList["units"][i]["allocatedCredit"][j].number);
+            sum += parseFloat(addupList['units'][i]['allocatedCredit'][j].number);
          }
       }
       return [sum, addupList.number, addupList.description];
@@ -326,7 +329,7 @@ class Requirement extends React.Component {
       let addupList = this.state.tree.addupList;
       let length = addupList.units.length;
       for (let i = 0; i < length; i++) {
-         if (addupList["units"][i].id == id) {
+         if (addupList['units'][i].id == id) {
             return true;
          }
       }
@@ -498,7 +501,7 @@ class Requirement extends React.Component {
             }
          }, parentThis);
 
-         // console.info("allocationGroups:\n" + JSON.stringify(allocationGroups_global, null, '\t'));
+         // console.info('allocationGroups:\n' + JSON.stringify(allocationGroups_global, null, '\t'));
 
          /**
           * 上で求めた各組み合わせについて、単位の割り当て方を全パターン求める。
@@ -522,7 +525,7 @@ class Requirement extends React.Component {
          for (let i = 0; i < allocationGroups_global.length; i++) {
 
             let targetGroup = allocationGroups_global[i];
-            // console.info("targetGroup:\n" + JSON.stringify(targetGroup, null, '\t'));
+            // console.info('targetGroup:\n' + JSON.stringify(targetGroup, null, '\t'));
 
             // 配列0行目の要素はユニットidを並べた配列
             if (!creditSumPattern[i]) {
@@ -538,7 +541,7 @@ class Requirement extends React.Component {
 
             // console.info(targetGroup.credits.length);
 
-            var paddinger = new Array(targetGroup.credits.length + 1).join("0");
+            var paddinger = new Array(targetGroup.credits.length + 1).join('0');
             // console.info(paddinger);
 
             var _bestOverflowNum = Number.MAX_VALUE;
@@ -547,7 +550,7 @@ class Requirement extends React.Component {
             loop:
                for (let j = 0; j < Math.pow(targetGroup.units.length, targetGroup.credits.length); j++) {
 
-                  // console.info("%cpattern " + j + " of " + Math.pow(targetGroup.units.length, targetGroup.credits.length), 'font-weight: bold');
+                  // console.info('%cpattern ' + j + ' of ' + Math.pow(targetGroup.units.length, targetGroup.credits.length), 'font-weight: bold');
                   // console.info(targetGroup);
 
                   // 科目分類数の進数表現を利用して各単位を割り当てる科目分類を表現
@@ -646,7 +649,7 @@ class Requirement extends React.Component {
             tree: units
          });
 
-         // console.log("done");
+         // console.log('done');
          resolve();
       });
 
@@ -672,7 +675,7 @@ class Requirement extends React.Component {
          // console.info('groupindex:\n' + JSON.stringify(groupIndex));
 
          // 1つ前のグループまでで確定したユニットと単位の組み合わせを抽出
-         var premiseAllocation = {}
+         var premiseAllocation = {};
          for (let i = 0; i < premisePatterns.length; i++) {
             for (let j = 0; j < creditSumPattern[i][premisePatterns[i]].length; j++) {
                if (!premiseAllocation[creditSumPattern[i][0][j]]) {
@@ -685,7 +688,7 @@ class Requirement extends React.Component {
 
          // 再帰の末尾まで達した場合
          if (allocationGroups_global.length == groupIndex) {
-            // console.info("maximum depth reached.");
+            // console.info('maximum depth reached.');
             // getWholeAllocation.bestPattern.push(premisePatterns);
             // console.groupEnd();
 
@@ -765,7 +768,7 @@ class Requirement extends React.Component {
 
    getCreditsFromId(idList) {
       if (idList) {
-         var result = []
+         var result = [];
          for (let i = 0; i < idList.length; i++) {
             result.push(user_grade_global.creditList[idList[i]]);
          }
@@ -793,7 +796,7 @@ class Requirement extends React.Component {
    }
 
    clone(src) {
-      var dst = {}
+      var dst = {};
       for (var k in src) {
          dst[k] = src[k];
       }
@@ -810,22 +813,22 @@ class LargeCategory extends React.Component {
    }
 
    render() {
-      let idName = "panel-" + LARGE_CATEGORY[this.props.type];
+      let idName = 'panel-' + LARGE_CATEGORY[this.props.type];
       let categoryName = LARGE_CATEGORY_NAME[this.props.type];
 
       return (
          <div id={idName} className="large-category">
             <h3>{categoryName}</h3>
-            <div className="panel-collapse collapse in" id={idName + "-collapse"}>
+            <div className="panel-collapse collapse in" id={idName + '-collapse'}>
                <div className="panel-body">
                   {
                      (() => {
-                        if (this.props.units["required"].length != 0) {
+                        if (this.props.units['required'].length != 0) {
                            return (
-                              <SmallCategory units={this.props.units["required"]} calAddupList={this.props.calAddupList}
+                              <SmallCategory units={this.props.units['required']} calAddupList={this.props.calAddupList}
                                              isInAddupList={this.props.isInAddupList}
-                                             determined={this.props.units["determined"][0]}
-                                             addup={this.props.units["addup"][0]}
+                                             determined={this.props.units['determined'][0]}
+                                             addup={this.props.units['addup'][0]}
                                              parentType={this.props.type} type={0}/>
                            );
                         }
@@ -833,12 +836,12 @@ class LargeCategory extends React.Component {
                   }
                   {
                      (() => {
-                        if (this.props.units["elective"].length != 0) {
+                        if (this.props.units['elective'].length != 0) {
                            return (
-                              <SmallCategory units={this.props.units["elective"]} calAddupList={this.props.calAddupList}
+                              <SmallCategory units={this.props.units['elective']} calAddupList={this.props.calAddupList}
                                              isInAddupList={this.props.isInAddupList}
-                                             determined={this.props.units["determined"][1]}
-                                             addup={this.props.units["addup"][1]}
+                                             determined={this.props.units['determined'][1]}
+                                             addup={this.props.units['addup'][1]}
                                              parentType={this.props.type} type={1}/>
                            );
                         }
@@ -846,12 +849,12 @@ class LargeCategory extends React.Component {
                   }
                   {
                      (() => {
-                        if (this.props.units["free"].length != 0) {
+                        if (this.props.units['free'].length != 0) {
                            return (
-                              <SmallCategory units={this.props.units["free"]} calAddupList={this.props.calAddupList}
+                              <SmallCategory units={this.props.units['free']} calAddupList={this.props.calAddupList}
                                              isInAddupList={this.props.isInAddupList}
-                                             determined={this.props.units["determined"][2]}
-                                             addup={this.props.units["addup"][2]}
+                                             determined={this.props.units['determined'][2]}
+                                             addup={this.props.units['addup'][2]}
                                              parentType={this.props.type} type={2}/>
                            );
                         }
@@ -873,7 +876,7 @@ class SmallCategory extends React.Component {
    }
 
    render() {
-      let idName = "panel-" + LARGE_CATEGORY[this.props.parentType] + "-" + SMALL_CATEGORY[this.props.type];
+      let idName = 'panel-' + LARGE_CATEGORY[this.props.parentType] + '-' + SMALL_CATEGORY[this.props.type];
       let categoryName = SMALL_CATEGORY_NAME[this.props.type];
 
       return (
@@ -886,16 +889,16 @@ class SmallCategory extends React.Component {
                      let addupDescription = null;
                      let addupStatus;
                      let addup_info = this.props.calAddupList();
-                     let status_class = "";
+                     let status_class = '';
                      addupDescription = addup_info[2];
-                     addupStatus = "取得単位数 : " + addup_info[0] + " / 必要単位数 : " + addup_info[1];
+                     addupStatus = '取得単位数 : ' + addup_info[0] + ' / 必要単位数 : ' + addup_info[1];
                      if (addup_info[1] <= addup_info[0]) {
-                        status_class = "filled";
+                        status_class = 'filled';
                      } else {
-                        status_class = "unfilled";
+                        status_class = 'unfilled';
                      }
                      return (
-                        <div className={status_class + " mdl-card mdl-shadow--4dp addup-info"}>
+                        <div className={status_class + ' mdl-card mdl-shadow--4dp addup-info'}>
                            <div className="mdl-card__supporting-text">
                               <span>{addupDescription}</span>{addupStatus}
                            </div>
@@ -904,7 +907,7 @@ class SmallCategory extends React.Component {
                   }
                })()
             }
-            <div className="panel-collapse collapse in" id={idName + "-collapse"}>
+            <div className="panel-collapse collapse in" id={idName + '-collapse'}>
                <div className="panel-body">
                   {
                      (() => {
@@ -912,7 +915,7 @@ class SmallCategory extends React.Component {
                         if (this.props.determined) {
                            // console.info(this.props.units);
                            return (
-                              <table id={idName + "-result"}
+                              <table id={idName + '-result'}
                                      className="mdl-data-table mdl-js-data-table mdl-shadow--2dp result-table">
                                  <thead>
                                  <tr>
@@ -925,7 +928,7 @@ class SmallCategory extends React.Component {
                                  {
                                     this.props.units.map(function (unit) {
                                        return (
-                                          <Unit determined={true} key={unit["id"]} data={unit}/>
+                                          <Unit determined={true} key={unit['id']} data={unit}/>
                                        );
                                     })
                                  }
@@ -934,13 +937,13 @@ class SmallCategory extends React.Component {
                            );
                         } else {
                            return (
-                              <div id={idName + "-result"}>
+                              <div id={idName + '-result'}>
                                  {
                                     this.props.units.map(function (unit) {
                                        return (
                                           <Unit calAddupList={parentThis.props.calAddupList}
                                                 isInAddupList={parentThis.props.isInAddupList} determined={false}
-                                                key={unit["id"]}
+                                                key={unit['id']}
                                                 data={unit}/>
                                        );
                                     })
@@ -971,7 +974,7 @@ class Unit extends React.Component {
    }
 
    get id() {
-      return this.props.data.id
+      return this.props.data.id;
    }
 
    get match() {
@@ -988,9 +991,9 @@ class Unit extends React.Component {
 
    get number() {
       if (this.props.data.number.hasRange) {
-         return parseFloat(this.props.data.number["maximum"]);
+         return parseFloat(this.props.data.number['maximum']);
       } else {
-         return parseFloat(this.props.data.number["number"]);
+         return parseFloat(this.props.data.number['number']);
       }
    }
 
@@ -1009,17 +1012,17 @@ class Unit extends React.Component {
    numToString() {
       // console.log(this.props.data.number.hasRange);
       if (this.props.data.number.hasRange) {
-         return (this.props.data.number["minimum"] + " ~ " + this.props.data.number["maximum"]);
+         return (this.props.data.number['minimum'] + ' ~ ' + this.props.data.number['maximum']);
       } else {
-         return this.props.data.number["number"];
+         return this.props.data.number['number'];
       }
    }
 
    allocatedCreditSum() {
       let sum = 0;
-      let length = this.props.data["allocatedCredit"].length
+      let length = this.props.data['allocatedCredit'].length;
       for (let i = 0; i < length; i++) {
-         sum += parseFloat(this.props.data["allocatedCredit"][i].number);
+         sum += parseFloat(this.props.data['allocatedCredit'][i].number);
       }
       return sum;
    }
@@ -1028,7 +1031,7 @@ class Unit extends React.Component {
    render() {
 
       if (this.props.determined) {
-         let credit = this.props.data["allocatedCredit"][0];
+         let credit = this.props.data['allocatedCredit'][0];
          let total;
          let status;
          if (credit) {
@@ -1037,30 +1040,30 @@ class Unit extends React.Component {
                status = 'learning';
             } else {
                total = '習得済';
-               status = "";
+               status = '';
             }
          } else {
             total = '未習得';
             status = 'unacquired';
          }
          return (
-            <tr className={status} key={"unit" + this.id}>
-               <td className="mdl-data-table__cell--non-numeric" key={"unit" + this.id + "-name"}>{this.name}</td>
-               <td key={"unit" + this.id + "-number"}>{this.number}</td>
-               <td key={"unit" + this.id + "-total"}>{total}</td>
+            <tr className={status} key={'unit' + this.id}>
+               <td className="mdl-data-table__cell--non-numeric" key={'unit' + this.id + '-name'}>{this.name}</td>
+               <td key={'unit' + this.id + '-number'}>{this.number}</td>
+               <td key={'unit' + this.id + '-total'}>{total}</td>
             </tr>
          );
       } else {
-         let status = "";
+         let status = '';
          if (!this.hasRange()) {
             if (this.number <= this.allocatedCreditSum()) {
-               status = "filled";
+               status = 'filled';
             } else {
-               status = "unfilled";
+               status = 'unfilled';
             }
          } else {
             if (this.number <= this.allocatedCreditSum()) {
-               status = "filled";
+               status = 'filled';
             }
          }
          return (
@@ -1068,7 +1071,7 @@ class Unit extends React.Component {
                <thead className={status}>
                <tr>
                   <th className="mdl-data-table__cell--non-numeric col-header"
-                      colSpan="2">{this.props.data["name"]}</th>
+                      colSpan="2">{this.props.data['name']}</th>
                </tr>
                <tr>
                   <th className="mdl-data-table__cell--non-numeric col-header" colSpan="2">取得単位数
@@ -1077,7 +1080,7 @@ class Unit extends React.Component {
                </tr>
                {
                   (() => {
-                     if (this.props.data["allocatedCredit"].length != 0) {
+                     if (this.props.data['allocatedCredit'].length != 0) {
                         return (
                            <tr>
                               <th className="mdl-data-table__cell--non-numeric">単位名</th>
@@ -1091,7 +1094,7 @@ class Unit extends React.Component {
                <tbody>
                {
                   (() => {
-                     if (this.props.data["allocatedCredit"].length == 0) {
+                     if (this.props.data['allocatedCredit'].length == 0) {
                         return (
                            <tr>
                               <td className="mdl-data-table__cell--non-numeric" colSpan="2">割り当て単位なし</td>
@@ -1101,13 +1104,13 @@ class Unit extends React.Component {
                   })()
                }
                {
-                  this.props.data["allocatedCredit"].map(function (credit) {
+                  this.props.data['allocatedCredit'].map(function (credit) {
                      // console.info(credit);
                      return (
                         <tr key={credit.id + credit.code}>
                            <td className="mdl-data-table__cell--non-numeric"
-                               key={credit.id + credit.code + "-name"}>{credit.title}</td>
-                           <td key={credit.id + credit.code + "-number"}>{credit.number}</td>
+                               key={credit.id + credit.code + '-name'}>{credit.title}</td>
+                           <td key={credit.id + credit.code + '-number'}>{credit.number}</td>
                         </tr>
                      );
                   })
@@ -1169,7 +1172,7 @@ class Grade {
    parseCreditFile(fileText) {
       return new Promise(function (resolve) {
          var creditArray = [];
-         var rowArray = fileText.split("\n");
+         var rowArray = fileText.split('\n');
          var index = 0;
          // rowArray.shift();
          // console.log(rowArray);
@@ -1178,7 +1181,7 @@ class Grade {
          var numberColumnIndex = null;
          var totalColumnIndex = null;
          rowArray.forEach(function (currentValue, index) {
-            var eleArray = currentValue.split("\",\"");
+            var eleArray = currentValue.split('\",\"');
             if (index == 0) {
                // console.log(eleArray);
                for (var i = 0; i < eleArray.length; i++) {
@@ -1193,7 +1196,7 @@ class Grade {
                   }
                }
             } else {
-               if (currentValue != "") {
+               if (currentValue != '') {
                   let newCredit = new Credit(
                      (index - 1),
                      eleArray[codeColumnIndex],
@@ -1221,134 +1224,3 @@ class Credit {
    }
 
 }
-
-class Alert extends React.Component {
-
-   constructor(props) {
-      super(props);
-      this.state = {
-         noFile: this.props.noFile
-      };
-   }
-
-   componentWillReceiveProps(nextProps) {
-      // console.log("Alert's props is updated: %O", nextProps);
-      this.setState({
-         noFile: nextProps.noFile
-      });
-   }
-
-   render() {
-      if (this.state.noFile) {
-         return (
-            <div className="alert alert-danger">
-               <strong>Oh snap!</strong> <a href="#" className="alert-link">Change a few things up</a> and try
-               submitting
-               again.
-            </div>
-         );
-      } else {
-         return (
-            <div />
-         );
-      }
-   }
-}
-
-class InputForm extends React.Component {
-
-   constructor(props) {
-      super(props);
-
-      this.state = {
-         fileName: "",
-         noFile: this.props.noFile
-      };
-   }
-
-   componentWillReceiveProps(nextProps) {
-      this.setState({
-         noFile: nextProps.noFile
-      });
-   }
-
-   render() {
-      return (
-         <div id="input-form-wrapper">
-            <div className="mdl-grid">
-               <CollageSelector />
-               <FileForm noFile={this.state.noFile}/>
-            </div>
-            <div className="mdl-grid">
-               <div id="check-button-wrapper" className="mdl-cell mdl-cell--12-col">
-                  <button id="check-button" className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                     Check!
-                  </button>
-               </div>
-            </div>
-         </div>
-      );
-   }
-
-}
-
-function CollageSelector() {
-   return (
-      <div className="mdl-cell mdl-cell--6-col">
-         <p>1. 入学年度・学類を選択します</p>
-         <div id="collage-input-wrapper" className="mdl-textfield mdl-js-textfield">
-            <select className="mdl-textfield__input" id="collage">
-               <option value="coins_26_software">情報科学類 / H26年度入学 / ソフトウェアサイエンス主専攻</option>
-               <option value="coins_26_jyoshisu">情報科学類 / H26年度入学 /情報システム主専攻</option>
-               <option value="coins_26_intelligence">情報科学類 / H26年度入学 / 知能情報メディア主専攻</option>
-               <option value="coins_27_software">情報科学類 / H27年度以降入学 / ソフトウェアサイエンス主専攻</option>
-               <option value="coins_27_jyoshisu">情報科学類 / H27年度以降入学 /情報システム主専攻</option>
-               <option value="coins_27_intelligence">情報科学類 / H27年度以降入学 / 知能情報メディア主専攻</option>
-            </select>
-         </div>
-      </div>
-   );
-}
-
-class FileForm extends React.Component {
-
-   constructor(props) {
-      super(props);
-      this.state = {
-         fileName: ""
-      };
-      this.selectFile = this.selectFile.bind(this);
-      this.changeText = this.changeText.bind(this);
-   }
-
-   selectFile() {
-      var selecter = document.getElementById('fileSelecter');
-      selecter.click();
-      selecter.onchange = this.changeText;
-   }
-
-   changeText() {
-      // console.log("file is selected: " + $('#fileSelecter')[0].files[0].name);
-      this.setState({
-         fileName: $('#fileSelecter')[0].files[0].name,
-      });
-   }
-
-   render() {
-      return (
-         <div className="mdl-cell mdl-cell--6-col">
-            <p>2. 履修科目データのCSVを選択します</p>
-            <input type="file" id="fileSelecter" className="form-contorl" style={{display: "none"}}></input>
-            <div id="file-input-wrapper">
-               <button type="button" id="file-select-icon" className="mdl-button mdl-js-button"
-                       onClick={this.selectFile}><i
-                  className="material-icons">file_upload</i></button>
-               <input type="text" id="fileName" placeholder="Select file ..." readOnly
-                      value={this.state.fileName}></input>
-            </div>
-         </div>
-      );
-   }
-}
-
-
