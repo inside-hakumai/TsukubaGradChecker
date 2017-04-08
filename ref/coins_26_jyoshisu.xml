@@ -268,7 +268,7 @@
          <number>5.5</number>
          <unit type="multiple">
             <name>GB0で始まる科目 / 他学群・他学類の授業科目 / 特設自由科目 / 博物館に関する科目</name>
-            <match>(^GB0|^(?!(GB|GA)).*$|^8|^99)</match>
+            <match>(^GB0|^(?=[A-Y])(?!(GB|GA)).*$|^8|^99)</match>
             <number>
                <range>
                   <minimum>0</minimum>
