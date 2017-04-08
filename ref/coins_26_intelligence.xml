@@ -153,12 +153,12 @@
          </unit>
          <unit type="single">
             <name>専門語学A</name>
-            <match>^GB19401$</match>
+            <match>^GB19041$</match>
             <number>1.5</number>
          </unit>
          <unit type="single">
             <name>専門語学B</name>
-            <match>^GB19501$</match>
+            <match>^GB19051$</match>
             <number>1.5</number>
          </unit>
       </required>
