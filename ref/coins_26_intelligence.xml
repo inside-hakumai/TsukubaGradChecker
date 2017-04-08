@@ -204,7 +204,7 @@
       <free addup="「基礎科目(共通科目)の自由科目」と「基礎科目(関連科目)の自由科目」で合計5.5単位">
          <number>5.5</number>
          <unit type="multiple">
-            <name>自由科目I・II</name>
+            <name>総合科目I・II</name>
             <match>^(11|12|13|1A|1B|1C)</match>
             <number>
                <range>
